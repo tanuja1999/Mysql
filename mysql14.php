@@ -2,7 +2,7 @@
 $servername= "localhost";
 $username = "root";
 $password = "";
-$dbname = "myDBPDO";
+$dbname = "MyDBPDO";
 
 try 
 {
