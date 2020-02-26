@@ -5,28 +5,30 @@ $password = "";
 $dbname = "myDBPDO";
 
 try {
-    $conn = new PDO("mysql:host=$servername;dbname= $dbname", $username, $password);
-    // set the PDO exception 
+    $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+    // set the PDO error mode to exception
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    
-    // begin th transaction 
+
+    // begin the transaction
     $conn->beginTransaction();
-    // our sql statements
-    $conn->exec("INSERT INTO MyGuest (firstname , lastname, email)
-    VALUES ('John','Doe','john@example.com')");
-    $conn->exec("INSERT INTO MyGuest (firstname , lastname, email)
-    VALUES ('Mary','Moe','Mary@example.com')");
-    $conn->exec("INSERT INTO MyGuest (firstname , lastname, email)
-    VALUES ('Julie','Dooley','julie@example.com')");
-    //commit the transaction
+    // our SQL statements
+    $conn->exec("INSERT INTO MyGuests (firstname, lastname, email)
+    VALUES ('John', 'Doe', 'john@example.com')");
+    $conn->exec("INSERT INTO MyGuests (firstname, lastname, email)
+    VALUES ('Mary', 'Moe', 'mary@example.com')");
+    $conn->exec("INSERT INTO MyGuests (firstname, lastname, email)
+    VALUES ('Julie', 'Dooley', 'julie@example.com')");
+
+    // commit the transaction
     $conn->commit();
-    echo "New records created successfully"; 
-}
-catch(PDOexception $e)
-{
-    // Rollback the transaction if something failed
+    echo "New records created successfully";
+    }
+catch(PDOException $e)
+    {
+    // roll back the transaction if something failed
     $conn->rollback();
-    echo "Error : " . $e->getMessage(); 
-}
+    echo "Error: " . $e->getMessage();
+    }
+
 $conn = null;
-?>
+?> 
